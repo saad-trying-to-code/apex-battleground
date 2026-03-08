@@ -349,7 +349,7 @@ const Input = {
     });
     window.addEventListener('keyup', e => { if (document.activeElement.tagName === 'INPUT') return; if(this.keys[e.code]){this.keys[e.code].down=false;this.keys[e.code].just=false;} });
     window.addEventListener('mousemove', e => { this.mouseX=e.clientX; this.mouseY=e.clientY; });
-    window.addEventListener('mousedown', e => { e.preventDefault(); if(e.button===0){this.mouseDown=true;this.mouseJustDown=true;} });
+    window.addEventListener('mousedown', e => { if(e.target.tagName==='INPUT')return; e.preventDefault(); if(e.button===0){this.mouseDown=true;this.mouseJustDown=true;} });
     window.addEventListener('mouseup', e => { e.preventDefault(); if(e.button===0)this.mouseDown=false; });
     window.addEventListener('contextmenu', e => e.preventDefault());
     window.addEventListener('blur', () => { this.keys={}; this.mouseDown=false; this.mouseJustDown=false; });
