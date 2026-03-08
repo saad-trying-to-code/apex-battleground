@@ -337,6 +337,7 @@ const Input = {
   keys:{}, mouseX:0, mouseY:0, mouseDown:false, mouseJustDown:false,
   init() {
     window.addEventListener('keydown', e => {
+      if (document.activeElement.tagName === 'INPUT') return;
       if (!e.repeat) {
         if (!this.keys[e.code]) this.keys[e.code]={down:true,just:true};
         else { this.keys[e.code].down=true; this.keys[e.code].just=true; }
@@ -346,7 +347,7 @@ const Input = {
       }
       if (['Space','KeyQ','KeyE','KeyR','ShiftLeft','ShiftRight','KeyW','KeyA','KeyS','KeyD','KeyZ'].includes(e.code)) e.preventDefault();
     });
-    window.addEventListener('keyup', e => { if(this.keys[e.code]){this.keys[e.code].down=false;this.keys[e.code].just=false;} });
+    window.addEventListener('keyup', e => { if (document.activeElement.tagName === 'INPUT') return; if(this.keys[e.code]){this.keys[e.code].down=false;this.keys[e.code].just=false;} });
     window.addEventListener('mousemove', e => { this.mouseX=e.clientX; this.mouseY=e.clientY; });
     window.addEventListener('mousedown', e => { e.preventDefault(); if(e.button===0){this.mouseDown=true;this.mouseJustDown=true;} });
     window.addEventListener('mouseup', e => { e.preventDefault(); if(e.button===0)this.mouseDown=false; });
